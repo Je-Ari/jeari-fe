@@ -28,17 +28,23 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   }, []);
 
   return (
-    <div className="group relative mt-6 w-full overflow-hidden rounded-lg shadow-lg aspect-[3/1]">
+    <div className="group relative mt-10 aspect-[3/1] w-full overflow-hidden rounded-lg shadow-lg">
       <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {images.map(image => (
           <img key={image.id} src={image.src} alt={image.alt} className="h-full w-full flex-shrink-0 object-cover" />
         ))}
       </div>
 
-      <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 transform rounded-full bg-black/50 p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <button
+        onClick={prevSlide}
+        className="absolute top-1/2 left-4 -translate-y-1/2 transform rounded-full bg-black/50 p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      >
         &#10094;
       </button>
-      <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 transform rounded-full bg-black/50 p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <button
+        onClick={nextSlide}
+        className="absolute top-1/2 right-4 -translate-y-1/2 transform rounded-full bg-black/50 p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      >
         &#10095;
       </button>
 
