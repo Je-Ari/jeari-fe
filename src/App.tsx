@@ -3,7 +3,10 @@ import './App.css';
 import Header from './components/Header';
 import ClubCard from './components/ClubCard';
 import Filter from './components/Filter';
+import Carousel from './components/Carousel'; // Carousel 컴포넌트 import
+import Footer from './components/Footer'; // Footer 컴포넌트 import
 import { clubs as mockClubs } from './mock/clubs';
+import { carouselImages } from './mock/carousel'; // Carousel 이미지 데이터 import
 import type { Club } from './types';
 
 function App() {
@@ -27,9 +30,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen text-center">
+    <div className="flex min-h-screen flex-col text-center">
       <Header />
-      <main className="p-4">
+      <main className="mx-auto w-full max-w-7xl flex-grow p-4 pt-20">
+        <Carousel images={carouselImages} /> {/* Carousel 컴포넌트 추가 */}
         <Filter allTags={allTags} onFilterChange={handleFilterChange} />
         <div className="grid grid-cols-1 gap-6 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredClubs.map(club => (
@@ -37,6 +41,7 @@ function App() {
           ))}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
