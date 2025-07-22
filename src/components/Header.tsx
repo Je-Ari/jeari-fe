@@ -1,17 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   return (
-    <header className="fixed top-0 z-50 flex h-20 w-full items-center justify-between bg-white px-6 shadow-md lg:px-20">
+    <header className="fixed top-0 z-50 flex h-20 w-full items-center justify-between bg-white px-6 shadow-md lg:px-32">
       {/* 로고 영역 */}
-      <div className="flex items-center gap-2">
-        <div className="h-10 w-10 rounded-full bg-black/10" />
-        <span className="text-2xl font-medium text-black">JeAri</span>
-      </div>
+      <Link to="/" className="flex items-center gap-2">
+        <div className="h-12 w-12 rounded-full">
+          <img src={'src/assets/jeari3.png'} className="h-full w-full rounded-full object-cover" />
+        </div>
+        <span className="text-2xl font-medium text-black">
+          <span className="text-3xl text-orange-500">JEA</span>ri
+        </span>
+      </Link>
 
       {/* 네비게이션 메뉴 (모바일에서 숨김) */}
       <nav className="hidden items-center gap-6 md:flex">
-        {['홈', '동아리 전체', '이벤트', '공지사항'].map(label => (
+        <Link to="/" className="text-sm text-black hover:underline lg:text-base">
+          홈
+        </Link>
+        {['동아리 전체', '이벤트', '공지사항'].map(label => (
           <a key={label} href="#" className="text-sm text-black hover:underline lg:text-base">
             {label}
           </a>
