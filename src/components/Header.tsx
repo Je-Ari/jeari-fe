@@ -25,10 +25,10 @@ const Header: React.FC = () => {
           </a>
         ))}
 
-        {/* 검색창 */}
-        <div className="flex w-32 items-center gap-2 rounded-md border border-black/10 p-2 lg:w-48">
-          <span className="flex-1 text-sm text-black/50">Search in site</span>
-          <div className="h-4 w-4 bg-black/70" />
+        <div className="flex items-center gap-4">
+          <Link to="/login" className="text-sm text-orange-600 hover:underline lg:text-base">
+            로그인
+          </Link>
         </div>
       </nav>
 
