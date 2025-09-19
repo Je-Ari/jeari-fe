@@ -1,13 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useUserStore from '../store/userStore';
 
 const Header: React.FC = () => {
+  const { user, isLoggedIn, clearUser } = useUserStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearUser();
+    // TODO: 백엔드에 로그아웃 요청 (쿠키 삭제 등)
+    alert('로그아웃 되었습니다.');
+    navigate('/login');
+  };
+
   return (
     <header className="fixed top-0 z-50 flex h-20 w-full items-center justify-between bg-white px-6 shadow-md lg:px-32">
       {/* 로고 영역 */}
       <Link to="/" className="flex items-center gap-2">
         <div className="h-12 w-12 rounded-full">
-          <img src={'src/assets/jeari3.png'} className="h-full w-full rounded-full object-cover" />
+          <img src={'/src/assets/jeari3.png'} className="h-full w-full rounded-full object-cover" />
         </div>
         <span className="text-2xl font-medium text-black">
           <span className="text-3xl text-orange-500">JEA</span>ri
@@ -26,9 +37,20 @@ const Header: React.FC = () => {
         ))}
 
         <div className="flex items-center gap-4">
-          <Link to="/login" className="text-sm text-orange-600 hover:underline lg:text-base">
-            로그인
-          </Link>
+          {isLoggedIn && user ? (
+            <>
+              <span className="text-sm text-gray-700 lg:text-base">{user.username}님</span>
+              <button onClick={handleLogout} className="text-sm text-orange-600 hover:underline lg:text-base">
+                로그아웃
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="text-sm text-orange-600 hover:underline lg:text-base">
+                로그인
+              </Link>
+            </>
+          )}
         </div>
       </nav>
 

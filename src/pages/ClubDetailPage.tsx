@@ -42,7 +42,7 @@ const ClubDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 소개 및 게시판 */}
+      {/* 소개 및 게시판 nav */}
       <div className="mt-6">
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex space-x-8" aria-label="Tabs">
@@ -61,6 +61,7 @@ const ClubDetailPage: React.FC = () => {
           </nav>
         </div>
 
+        {/* contents */}
         <div className="mt-6">
           {activeTab === 'introduction' && (
             <div className="rounded-lg bg-white p-6 shadow-md">
