@@ -1,26 +1,56 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import useUserStore from '../store/userStore';
 
 const Header: React.FC = () => {
+  const { user, isLoggedIn, clearUser } = useUserStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearUser();
+    // TODO: 백엔드에 로그아웃 요청 (쿠키 삭제 등)
+    alert('로그아웃 되었습니다.');
+    navigate('/login');
+  };
+
   return (
-    <header className="fixed top-0 z-50 flex h-20 w-full items-center justify-between bg-white px-6 shadow-md lg:px-20">
+    <header className="fixed top-0 z-50 flex h-20 w-full items-center justify-between bg-white px-6 shadow-md lg:px-32">
       {/* 로고 영역 */}
-      <div className="flex items-center gap-2">
-        <div className="h-10 w-10 rounded-full bg-black/10" />
-        <span className="text-2xl font-medium text-black">JeAri</span>
-      </div>
+      <Link to="/" className="flex items-center gap-2">
+        <div className="h-12 w-12 rounded-full">
+          <img src={'/src/assets/jeari3.png'} className="h-full w-full rounded-full object-cover" />
+        </div>
+        <span className="text-2xl font-medium text-black">
+          <span className="text-3xl text-orange-500">JEA</span>ri
+        </span>
+      </Link>
 
       {/* 네비게이션 메뉴 (모바일에서 숨김) */}
       <nav className="hidden items-center gap-6 md:flex">
-        {['홈', '동아리 전체', '이벤트', '공지사항'].map(label => (
+        <Link to="/" className="text-sm text-black hover:underline lg:text-base">
+          홈
+        </Link>
+        {['동아리 전체', '이벤트', '공지사항'].map(label => (
           <a key={label} href="#" className="text-sm text-black hover:underline lg:text-base">
             {label}
           </a>
         ))}
 
-        {/* 검색창 */}
-        <div className="flex w-32 items-center gap-2 rounded-md border border-black/10 p-2 lg:w-48">
-          <span className="flex-1 text-sm text-black/50">Search in site</span>
-          <div className="h-4 w-4 bg-black/70" />
+        <div className="flex items-center gap-4">
+          {isLoggedIn && user ? (
+            <>
+              <span className="text-sm text-gray-700 lg:text-base">{user.username}님</span>
+              <button onClick={handleLogout} className="text-sm text-orange-600 hover:underline lg:text-base">
+                로그아웃
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="text-sm text-orange-600 hover:underline lg:text-base">
+                로그인
+              </Link>
+            </>
+          )}
         </div>
       </nav>
 
